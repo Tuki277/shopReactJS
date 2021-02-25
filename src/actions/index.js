@@ -15,3 +15,18 @@ export const actionFetchProducts = (products) => {
         products
     }
 }
+
+export const actionGetProductByIdRequest = (id) => {
+    return dispatch => {
+        return callApi(`products/${id}`, 'GET', null).then(res => {
+            dispatch(actionGetProductById(res.data))
+        })
+    }
+}
+
+export const actionGetProductById = (product) => {
+    return {
+        type: Types.GET_PRODUCT_BY_ID,
+        product
+    }
+}

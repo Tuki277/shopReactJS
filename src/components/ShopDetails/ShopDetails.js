@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 class ShopDetails extends Component {
     render() {
+        var { products } = this.props
+
         return (
             <div>
                 <div className="bg-light py-3">
@@ -15,13 +17,13 @@ class ShopDetails extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-md-6">
-                                <img src="images/cloth_1.jpg" alt="Image" className="img-fluid" />
+                                <img src={ products[0].image } alt="Image" className="img-fluid" />
                             </div>
                             <div className="col-md-6">
-                                <h2 className="text-black">Tank Top T-Shirt</h2>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur, vitae, explicabo? Incidunt facere, natus soluta dolores iusto! Molestiae expedita veritatis nesciunt doloremque sint asperiores fuga voluptas, distinctio, aperiam, ratione dolore.</p>
-                                <p className="mb-4">Ex numquam veritatis debitis minima quo error quam eos dolorum quidem perferendis. Quos repellat dignissimos minus, eveniet nam voluptatibus molestias omnis reiciendis perspiciatis illum hic magni iste, velit aperiam quis.</p>
-                                <p><strong className="text-primary h4">$50.00</strong></p>
+                                <h2 className="text-black">{ products[0].name }</h2>
+                                <p>{ products[0].detail_product }</p>
+                                <p className="mb-4">Color { products[0].color }</p>
+                                <p><strong className="text-primary h4">${ products[0].price }</strong></p>
                                 <div className="mb-1 d-flex">
                                     <label htmlFor="option-sm" className="d-flex mr-3 mb-3">
                                         <span className="d-inline-block mr-2" style={{ top: '-2px', position: 'relative' }}><input type="radio" id="option-sm" name="shop-sizes" /></span> <span className="d-inline-block text-black">Small</span>

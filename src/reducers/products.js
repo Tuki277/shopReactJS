@@ -5,8 +5,10 @@ const products = (state = initialState, action) => {
     switch (action.type) {
         case Types.FETCH_PRODUCTS :
             state = action.products.rows
-            console.log(state)
-            return state
+            return [...state]
+        case Types.GET_PRODUCT_BY_ID :
+            state = action.product.rows
+            return [...state]
         default:
             return [...state]
     }

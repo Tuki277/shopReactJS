@@ -7,11 +7,9 @@ class Shop extends Component {
 
     componentDidMount () {
         this.props.fetchAllProducts();
-        console.log('componentDidMount')
     }
 
     showProducts (products) {
-        console.log(products)
         var result = null
         if (products.length > 0) {
             result = products.map((product, index) => {
@@ -29,7 +27,6 @@ class Shop extends Component {
 
     render() {
         var { products } = this.props
-        console.log(this.props.products)
         return (
             <div>
                 <div className="bg-light py-3">
@@ -58,7 +55,7 @@ class Shop extends Component {
                                     </div>
                                 </div>
                                 <div className="row mb-5">
-                                    {/* { this.showProducts(products) } */}
+                                    { this.showProducts(products) }
                                 </div>
                             </div>
                             <div className="col-md-3 order-1 mb-5 mb-md-0">
@@ -80,9 +77,8 @@ class Shop extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log(state.products.rows)
     return {
-        products : state.products.rows
+        products : state.products
     }
 }
 
