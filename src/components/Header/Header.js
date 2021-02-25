@@ -16,7 +16,7 @@ class Header extends Component {
                             </div>
                             <div className="col-12 mb-3 mb-md-0 col-md-4 order-1 order-md-2 text-center">
                                 <div className="site-logo">
-                                    <a href="index.html" className="js-logo-clone">Shoppers</a>
+                                    <a href="/" className="js-logo-clone">Shoppers</a>
                                 </div>
                             </div>
                             <div className="col-6 col-md-4 order-3 order-md-3 text-right">
