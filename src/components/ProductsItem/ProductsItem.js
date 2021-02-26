@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom'
 
 class ProductsItem extends Component {
     render() {
-
-        console.log(this.props)
         var { product } = this.props
         return (
             <div className="col-sm-6 col-lg-4 mb-4" data-aos="fade-up">

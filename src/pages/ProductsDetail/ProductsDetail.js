@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ShopDetails from './../../components/ShopDetails/ShopDetails'
 import { connect } from 'react-redux'
-import { actionGetProductByIdRequest } from './../../actions/index'
+import { actionGetProductByIdRequest, actionAddProductToCart } from './../../actions/index'
 
 class ProductsDetails extends Component {
 
@@ -14,11 +14,12 @@ class ProductsDetails extends Component {
     }
 
     render () {
-        console.log(this.props)
+        var { onAddProductToCart } = this.props
         return (
             <div>
                 <ShopDetails
                     products = { this.props.products }
+                    onAddProductToCart = { onAddProductToCart }
                 />
             </div>
         )
@@ -35,6 +36,10 @@ const mapDispatchToProps = (dispatch, props) => {
     return {
         getProduct : (id) => {
             dispatch(actionGetProductByIdRequest(id))
+        },
+        onAddProductToCart: (products) => {
+            console.log(products)
+            dispatch(actionAddProductToCart(products))
         }
     }
 }

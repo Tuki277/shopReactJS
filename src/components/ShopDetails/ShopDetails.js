@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 
 class ShopDetails extends Component {
+
+    onAddProductToCart = (products) => {
+        console.log('product ============= ', products)
+        this.props.onAddProductToCart(products)
+        console.log(this.props.onAddProductToCart(products))
+    }
+
     render() {
         var { products } = this.props
 
@@ -49,7 +56,14 @@ class ShopDetails extends Component {
                                         </div>
                                     </div>
                                 </div>
-                                <p><a href="cart.html" className="buy-now btn btn-sm btn-primary">Add To Cart</a></p>
+                                <p>
+                                    <a
+                                        className="buy-now btn btn-sm btn-primary"
+                                        onClick = { () => this.onAddProductToCart(products) }
+                                    >
+                                        Add To Cart
+                                    </a>
+                                </p>
                             </div>
                         </div>
                     </div>
