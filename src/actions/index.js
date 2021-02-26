@@ -30,3 +30,10 @@ export const actionGetProductById = (product) => {
         product
     }
 }
+
+export const addProductToCart = product => {
+    return {
+        type: Types.ADD_PRODUCTS_TO_CART,
+        product
+    }
+}
