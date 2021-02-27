@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 class ShopDetails extends Component {
 
     onAddProductToCart = (products) => {
-        console.log('product ============= ', products)
         this.props.onAddProductToCart(products)
         console.log(this.props.onAddProductToCart(products))
     }

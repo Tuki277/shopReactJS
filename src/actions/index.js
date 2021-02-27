@@ -31,10 +31,10 @@ export const actionGetProductById = (product) => {
     }
 }
 
-export const actionAddProductToCart = (product, quantity) => {
+export const actionAddProductToCart = (products, quantity) => {
     return {
         type: Types.ADD_PRODUCTS_TO_CART,
-        product,
+        products,
         quantity
     }
 }

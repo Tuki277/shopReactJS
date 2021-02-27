@@ -14,12 +14,11 @@ class ProductsDetails extends Component {
     }
 
     render () {
-        var { onAddProductToCart } = this.props
         return (
             <div>
                 <ShopDetails
                     products = { this.props.products }
-                    onAddProductToCart = { onAddProductToCart }
+                    onAddProductToCart = { this.props.onAddProductToCart }
                 />
             </div>
         )
@@ -37,9 +36,8 @@ const mapDispatchToProps = (dispatch, props) => {
         getProduct : (id) => {
             dispatch(actionGetProductByIdRequest(id))
         },
-        onAddProductToCart: (products) => {
-            console.log(products)
-            dispatch(actionAddProductToCart(products))
+        onAddProductToCart: (product) => {
+            dispatch(actionAddProductToCart(product, 1))
         }
     }
 }
