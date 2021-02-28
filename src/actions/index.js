@@ -38,3 +38,10 @@ export const actionAddProductToCart = (products, quantity) => {
         quantity
     }
 }
+
+export const actionDeleteProductInCart = (product) => {
+    return {
+        type: Types.DELETE_PRODUCT_IN_CART,
+        product
+    }
+}

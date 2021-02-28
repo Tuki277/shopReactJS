@@ -4,11 +4,11 @@ class ShopDetails extends Component {
 
     onAddProductToCart = (products) => {
         this.props.onAddProductToCart(products)
-        console.log(this.props.onAddProductToCart(products))
     }
 
     render() {
         var { products } = this.props
+        console.log(products)
 
         return (
             <div>
