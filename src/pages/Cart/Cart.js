@@ -3,6 +3,7 @@ import Cart from './../../components/Cart/Cart'
 import { connect } from 'react-redux'
 import CartItem from '../../components/CartItem/CartItem'
 import { actionDeleteProductInCart } from './../../actions/index'
+import CartResult from '../../components/CartResult/CartResult'
 
 class CartPages extends Component {
 
@@ -24,12 +25,25 @@ class CartPages extends Component {
         return result
     }
 
+    showTotalPrice = (cart) => {
+        var total = 0
+        if ( cart.length > 0) {
+            for (var i = 0; i < cart.length; i++) {
+                total += cart[i].products[0].price * cart[i].quantity
+            }
+        }
+        return total
+    }
+
     render () {
         var { cart } = this.props
         return (
-            <Cart>
-                { this.showItemInCart(cart) }
-            </Cart>
+            <div>
+                <Cart>
+                    { this.showItemInCart(cart) }
+                    { this.showTotalPrice(cart) }
+                </Cart>
+            </div>
         )
     }
 }
@@ -43,6 +57,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onDeleteProductInCart: (product) => {
+            console.log(product)
             dispatch(actionDeleteProductInCart(product))
         }
     }

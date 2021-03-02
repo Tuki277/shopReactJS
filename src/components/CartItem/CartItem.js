@@ -7,14 +7,12 @@ class CartItem extends Component {
     }
 
     onDeleteProductInCartFunc = (products) => {
-        // var { onDeleteProductInCart } = this.props
-        // onDeleteProductInCart(products)
-        console.log(this.props)
+        var { onDeleteProductInCart } = this.props
+        onDeleteProductInCart(products)
     }
 
     render () {
         var { item } = this.props
-        console.log(item.products)
         return (
             <tr>
                 <td className="product-thumbnail">
@@ -37,7 +35,7 @@ class CartItem extends Component {
                 </td>
                 <td>$ { this.showTotalPrice(item.products[0].price, item.quantity) } </td>
                 <td>
-                    <button type="button" className="btn btn-primary btn-sm" onClick = { () => this.onDeleteProductInCartFunc(item.products[0]) }>
+                    <button type="button" className="btn btn-primary btn-sm" onClick = { () => this.onDeleteProductInCartFunc(item.products) }>
                         X
                     </button>
                 </td>

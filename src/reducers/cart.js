@@ -36,6 +36,7 @@ var cart = (state = initialState, action) => {
             return [...state]
         case Types.DELETE_PRODUCT_IN_CART:
             index = findProductInCart(state, products)
+            console.log({ index })
             if (index !== -1) {
                 state.splice(index, 1)
             }

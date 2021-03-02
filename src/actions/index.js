@@ -39,9 +39,9 @@ export const actionAddProductToCart = (products, quantity) => {
     }
 }
 
-export const actionDeleteProductInCart = (product) => {
+export const actionDeleteProductInCart = (products) => {
     return {
         type: Types.DELETE_PRODUCT_IN_CART,
-        product
+        products
     }
 }
