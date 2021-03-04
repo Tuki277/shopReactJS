@@ -3,7 +3,6 @@ import Cart from './../../components/Cart/Cart'
 import { connect } from 'react-redux'
 import CartItem from '../../components/CartItem/CartItem'
 import { actionDeleteProductInCart } from './../../actions/index'
-import CartResult from '../../components/CartResult/CartResult'
 
 class CartPages extends Component {
 
@@ -57,7 +56,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch, props) => {
     return {
         onDeleteProductInCart: (product) => {
-            console.log(product)
             dispatch(actionDeleteProductInCart(product))
         }
     }

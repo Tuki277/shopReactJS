@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { checkoutRequest } from '../../actions'
+import Thankyou from '../Thankyou/Thankyou'
 
 class Checkout extends Component {
 
@@ -11,7 +13,10 @@ class Checkout extends Component {
             address : '',
             phone : '',
             note : '',
-            order : []
+            quantity : '',
+            orders : [],
+            price : '',
+            totalPrice : 0
         }
     }
 
@@ -24,13 +29,86 @@ class Checkout extends Component {
         })
     }
 
+    saveCart = (cart) => {
+        var result = ""
+        if ( cart.length > 0 ) {
+            for (var i = 0; i < cart.length; i++) {
+                result += String(cart[i].products[0].name) + ', '
+            }
+        }
+        console.log(result)
+        return result
+    }
+
     onSave = (event) => {
         event.preventDefault()
-        console.log(this.state)
+        var { name, address, phone, note, orders, quantity, totalPrice, price } = this.state
+        orders = this.saveCart(JSON.parse(localStorage.getItem('CART')))
+        totalPrice = this.showTotalPrice(this.props.cart)
+        quantity = this.showQuantity(this.props.cart)
+        price = this.showPriceProduct(this.props.cart)
+        var checkout = {
+            name : name,
+            address : address,
+            phone : phone,
+            note : note,
+            orders : orders,
+            quantity : quantity,
+            price : price,
+            totalPrice : totalPrice
+        }
+        this.props.checkout(checkout)
+        localStorage.removeItem('CART')
+        this.props.history.push('/thankyou')
+    }
+
+    showItemsInCart = (cart) => {
+        var result = null
+        if ( cart.length > 0 ) {
+            result = cart.map((item, index) => {
+                return (
+                    <tr>
+                        <td>{ item.products[0].name } <strong className="mx-2">x</strong> { item.quantity } </td>
+                        <td>$ { item.products[0].price }</td>
+                    </tr>
+                )
+            })
+        }
+        return result
+    }
+
+    showTotalPrice = (cart) => {
+        var total = 0
+        if ( cart.length > 0) {
+            for (var i = 0; i < cart.length; i++) {
+                total += cart[i].products[0].price * cart[i].quantity
+            }
+        }
+        return total
+    }
+
+    showQuantity = (cart) => {
+        var total = ''
+        if ( cart.length > 0) {
+            for (var i = 0; i < cart.length; i++) {
+                total += String(cart[i].quantity) + ', '
+            }
+        }
+        return total
+    }
+
+    showPriceProduct = (cart) => {
+        var price = ''
+        if ( cart.length > 0 ) {
+            for (var i = 0; i < cart.length; i++) {
+                price += String(cart[i].products[0].price) + ', '
+            }
+        }
+        return price
     }
 
     render() {
-        console.log(this.props)
+        var { cart } = this.props
         return (
             <div>
                 <div className="bg-light py-3">
@@ -109,21 +187,10 @@ class Checkout extends Component {
                                                             <th>Total</th>
                                                         </tr></thead>
                                                     <tbody>
-                                                        <tr>
-                                                            <td>Top Up T-Shirt <strong className="mx-2">x</strong> 1</td>
-                                                            <td>$250.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Polo Shirt <strong className="mx-2">x</strong>   1</td>
-                                                            <td>$100.00</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td className="text-black font-weight-bold"><strong>Cart Subtotal</strong></td>
-                                                            <td className="text-black">$350.00</td>
-                                                        </tr>
+                                                        { this.showItemsInCart(cart) }
                                                         <tr>
                                                             <td className="text-black font-weight-bold"><strong>Order Total</strong></td>
-                                                            <td className="text-black font-weight-bold"><strong>$350.00</strong></td>
+                                                            <td className="text-black font-weight-bold"><strong>$ { this.showTotalPrice( cart ) } </strong></td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -153,4 +220,12 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, null)(Checkout)
+const mapDispatchToProps = (dispatch, props) => {
+    return {
+        checkout : (product) => {
+            dispatch(checkoutRequest(product))
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout)

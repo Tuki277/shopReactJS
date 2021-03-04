@@ -1,9 +1,22 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Menu from '../Menu/Menu'
+import { connect } from 'react-redux'
 
 class Header extends Component {
+
+    showQuantity = (cart) => {
+        var result = 0
+        if ( cart.length > 0 ) {
+            for ( var i = 0; i < cart.length; i++ ) {
+                result += cart[i].quantity
+            }
+        }
+        return result
+    }
+
     render() {
+        var { cart } = this.props
         return (
             <header className="site-navbar" role="banner">
                 <div className="site-navbar-top">
@@ -27,7 +40,7 @@ class Header extends Component {
                                         <li>
                                             <Link to = {'/cart'} className="site-cart">
                                                 <span className="icon icon-shopping_cart" />
-                                                <span className="count">2</span>
+                                                <span className="count"> { this.showQuantity(cart) } </span>
                                             </Link>
                                         </li>
                                         <li className="d-inline-block d-md-none ml-md-0"><a href="#" className="site-menu-toggle js-menu-toggle"><span className="icon-menu" /></a></li>
@@ -47,4 +60,10 @@ class Header extends Component {
     }
 }
 
-export default Header
+const mapStateToProps = state => {
+    return {
+        cart : state.cart
+    }
+}
+
+export default connect(mapStateToProps, null)(Header)

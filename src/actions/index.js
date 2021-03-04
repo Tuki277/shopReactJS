@@ -45,3 +45,18 @@ export const actionDeleteProductInCart = (products) => {
         products
     }
 }
+
+export const checkoutRequest = (products) => {
+    return dispatch => {
+        return callApi('cart/products', 'POST', products).then(res => {
+            dispatch(checkout(res.data))
+        })
+    }
+}
+
+export const checkout = (products) => {
+    return {
+        type : Types.CHECKOUT,
+        products
+    }
+}

@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom'
 
 class CartResult extends Component {
     render () {
-        console.log(this.props)
         return (
             <div className="col-md-6 pl-5">
                 <div className="row justify-content-end">
