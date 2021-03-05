@@ -31,6 +31,21 @@ export const actionGetProductById = (product) => {
     }
 }
 
+export const actionGetProductInCartRequest = () => {
+    return dispatch => {
+        return callApi('cart/products', 'GET', null).then(res => {
+            dispatch(actionGetProductInCart(res.data))
+        })
+    }
+}
+
+export const actionGetProductInCart = (cart) => {
+    return {
+        type : Types.GET_ALL_PRODUCTS_IN_CART,
+        cart
+    }
+}
+
 export const actionAddProductToCart = (products, quantity) => {
     return {
         type: Types.ADD_PRODUCTS_TO_CART,
@@ -43,6 +58,21 @@ export const actionDeleteProductInCart = (products) => {
     return {
         type: Types.DELETE_PRODUCT_IN_CART,
         products
+    }
+}
+
+export const actDeleteProductInCartAdminRequest = (id) => {
+    return dispatch => {
+        return callApi(`cart/products/${id}`, 'DELETE', null).then(res =>{
+            dispatch(actDeleteProductInCartAdmin(id));
+        })
+    }
+}
+
+export const actDeleteProductInCartAdmin = (id) => {
+    return {
+        type : Types.DELETE_PRODUCT_IN_CART_ADMIN,
+        id
     }
 }
 

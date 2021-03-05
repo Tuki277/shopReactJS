@@ -18,10 +18,27 @@ var findProductInCart = (cart, product) => {
     return index
 }
 
+var findIndex = (products, id) => {
+    var result = -1;
+    products.forEach((product, index) => {
+        if (product.id === id) {
+            result = index;
+        }
+    });
+    return result;
+}
+
 var cart = (state = initialState, action) => {
-    var { products, quantity } = action
+    var { products, quantity, id } = action
     var index = -1
     switch(action.type) {
+        case Types.GET_ALL_PRODUCTS_IN_CART :
+            state = action.cart.rows
+            return [...state]
+        case Types.DELETE_PRODUCT_IN_CART_ADMIN:
+            index = findIndex(state, id);
+            state.splice(index, 1);
+            return [...state];
         case Types.ADD_PRODUCTS_TO_CART:
             index = findProductInCart(state, products)
             if (index !== -1) {
