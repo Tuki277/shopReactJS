@@ -19,8 +19,12 @@ class Admin extends Component {
                                     Tạo sản phẩm
                                 </Link>
                             </button>
-                            <br />
-                            <button type="submit" className="btn btn-primary"><a href="./edit" style={{ color: 'white' }}>Chỉnh sửa sản phẩm</a></button>
+                            {/* <br />
+                            <button type="submit" className="btn btn-primary">
+                                <a href="./edit" style={{ color: 'white' }}>
+                                    Danh sách sản phẩm
+                                </a>
+                            </button> */}
                             <br />
                             <button type="submit" className="btn btn-primary">
                                 <Link to = {'/report'} style={{ color: 'white' }}>

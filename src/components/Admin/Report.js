@@ -57,7 +57,7 @@ class Report extends Component {
                                     <table className="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th> { cart.name }</th>
+                                                <th>Name</th>
                                                 <th>Address</th>
                                                 <th>Phone</th>
                                                 <th>Product</th>

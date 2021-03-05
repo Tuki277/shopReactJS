@@ -1,6 +1,36 @@
 import * as Types from './../constants/ActionTypes'
 import callApi from './../utils/apiCall'
 
+export const actionAddProductRequest = (products) => {
+    return dispatch => {
+        return callApi('products', 'POST', products).then(res => {
+            dispatch(actionAddProduct(res.data))
+        })
+    }
+}
+
+export const actionAddProduct = (products) => {
+    return {
+        type: Types.ADD_PRODUCT,
+        products
+    }
+}
+
+export const actionUpdateProductRequest = (products) => {
+    return dispatch => {
+        return callApi(`products/${products.id}`, 'PUT', products).then(res => {
+            dispatch(actionUpdateProduct(res.data));
+        });
+    }
+}
+
+export const actionUpdateProduct = (products) => {
+    return {
+        type : Types.EDIT_PRODUCT,
+        products
+    }
+}
+
 export const actionFetchProductsRequest = () => {
     return dispatch => {
         return callApi('products', 'GET', null).then(res => {
@@ -28,6 +58,21 @@ export const actionGetProductById = (product) => {
     return {
         type: Types.GET_PRODUCT_BY_ID,
         product
+    }
+}
+
+export const actionDeleteProductRequest = (id) => {
+    return dispatch => {
+        return callApi(`products/${id}`, 'DELETE', null).then(res => {
+            dispatch(actionDeleteProduct(res.data))
+        })
+    }
+}
+
+export const actionDeleteProduct = (id) => {
+    return {
+        type: Types.DELETE_PRODUCT,
+        id
     }
 }
 
