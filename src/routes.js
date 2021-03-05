@@ -8,6 +8,9 @@ import ProductsDetails from './pages/ProductsDetail/ProductsDetail'
 import CartPages from './pages/Cart/Cart';
 import Thankyou from './components/Thankyou/Thankyou';
 import Checkout from './components/Checkout/Checkout';
+import Admin from './components/Admin/Admin'
+import Post from './components/Admin/Post';
+import Report from './components/Admin/Report'
 
 const routes = [
     {
@@ -49,6 +52,21 @@ const routes = [
         path: '/checkout',
         exact: false,
         main: ({ history }) => <Checkout history = { history }/>
+    },
+    {
+        path: '/admin',
+        exact: false,
+        main: () => <Admin />
+    },
+    {
+        path : '/post',
+        exact: false,
+        main: () => <Post />
+    },
+    {
+        report : '/report',
+        exact: false,
+        main: () => <Report />
     },
     {
         path: '',

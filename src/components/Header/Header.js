@@ -36,7 +36,11 @@ class Header extends Component {
                             <div className="col-6 col-md-4 order-3 order-md-3 text-right">
                                 <div className="site-top-icons">
                                     <ul>
-                                        <li><a href="#"><span className="icon icon-person" /></a></li>
+                                        <li>
+                                            <Link to = {'/admin'}>
+                                                <span className="icon icon-person" />
+                                                </Link>
+                                            </li>
                                         <li>
                                             <Link to = {'/cart'} className="site-cart">
                                                 <span className="icon icon-shopping_cart" />
