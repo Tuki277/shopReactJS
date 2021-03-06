@@ -56,7 +56,7 @@ class Index extends Component {
                         </div>
                     </div>
                 </div>
-                <div className="site-section site-blocks-2">
+                {/* <div className="site-section site-blocks-2">
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-6 col-md-6 col-lg-4 mb-4 mb-lg-0" data-aos="fade" data-aos-delay>
@@ -94,7 +94,7 @@ class Index extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
                 <div className="site-section block-3 site-blocks-2 bg-light">
                     <div className="container">
                         <div className="row justify-content-center">
@@ -102,7 +102,7 @@ class Index extends Component {
                                 <h2>Featured Products</h2>
                             </div>
                         </div>
-                        <div className="row">
+                        {/* <div className="row">
                             <div className="col-md-12">
                                 <div className="nonloop-block-3 owl-carousel">
                                     <div className="item">
@@ -167,7 +167,7 @@ class Index extends Component {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="site-section block-8">

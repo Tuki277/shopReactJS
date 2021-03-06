@@ -39,7 +39,7 @@ class Post extends Component {
                             <img src={product.image} style={{ width: '75%' }} />
                         </td>
                         <td> {product.size} </td>
-                        <td> {product.detail_product} </td>
+                        <td> {product.detail} </td>
                         <td> {product.price} </td>
                         <td> {product.color} </td>
                         <td> {product.quantity} </td>
