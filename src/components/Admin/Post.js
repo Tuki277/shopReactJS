@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actionAddProductRequest, actionDeleteProductRequest, actionFetchProductsRequest } from './../../actions/index'
+import { actionUpdateProductRequest, actionAddProductRequest, actionDeleteProductRequest, actionFetchProductsRequest } from './../../actions/index'
 import FileBase64 from 'react-file-base64'
 
 class Post extends Component {
@@ -19,6 +19,10 @@ class Post extends Component {
     }
 
     componentDidMount() {
+        this.props.fetchAllProducts()
+    }
+
+    componentWillReceiveProps() {
         this.props.fetchAllProducts()
     }
 
@@ -90,7 +94,6 @@ class Post extends Component {
             quantity: quantity,
             size: size
         }
-        console.log(product)
         this.props.addProducts(product)
     }
 
@@ -100,6 +103,9 @@ class Post extends Component {
       }
 
     render() {
+
+        var { name, image, detail, price, color, quantity, size } = this.state
+
         return (
             <div className="container body">
                 <div className="main_container">
@@ -122,6 +128,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="name"
                                                 className="form-control col-md-7 "
+                                                value = { name }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -134,6 +141,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="detail"
                                                 className="form-control col-md-7 "
+                                                value={ detail }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -146,6 +154,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="size"
                                                 className="form-control col-md-7 "
+                                                value={ size }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -158,6 +167,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="price"
                                                 className="form-control col-md-7 "
+                                                value={ price }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -170,6 +180,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="color"
                                                 className="form-control col-md-7 "
+                                                value={ color }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -182,6 +193,7 @@ class Post extends Component {
                                                 type="text"
                                                 required name="quantity"
                                                 className="form-control col-md-7 "
+                                                value={ quantity }
                                                 onChange={this.onChange}
                                             />
                                         </div>
@@ -253,6 +265,9 @@ const mapDispatchToProps = (dispatch, props) => {
         },
         deleteProduct: (id) => {
             dispatch(actionDeleteProductRequest(id))
+        },
+        updateProduct: (product) => {
+            dispatch(actionUpdateProductRequest(product))
         }
     }
 }

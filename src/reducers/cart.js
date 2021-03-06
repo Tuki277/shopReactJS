@@ -59,6 +59,11 @@ var cart = (state = initialState, action) => {
             }
             localStorage.setItem('CART', JSON.stringify(state))
             return [...state]
+        case Types.EDIT_PRODUCT:
+            index = findIndex(state, products.id);
+            console.log(products.id)
+            state[index] = products
+            return [...state]
         default :
             return [...state]
     }
