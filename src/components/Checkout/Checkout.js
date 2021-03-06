@@ -133,6 +133,7 @@ class Checkout extends Component {
                                                     className="form-control"
                                                     id="c_companyname"
                                                     name="name"
+                                                    required
                                                     onChange = { this.onChange }
                                                 />
                                             </div>
@@ -146,6 +147,7 @@ class Checkout extends Component {
                                                     id="c_address"
                                                     name="address"
                                                     placeholder="address"
+                                                    required
                                                     onChange = { this.onChange }
                                                 />
                                             </div>
@@ -158,6 +160,7 @@ class Checkout extends Component {
                                                     className="form-control" 
                                                     id="c_address" name="phone" 
                                                     placeholder="phone" 
+                                                    required
                                                     onChange = { this.onChange }
                                                 />
                                             </div>
@@ -171,6 +174,7 @@ class Checkout extends Component {
                                                 className="form-control"
                                                 placeholder="Write your notes here..."
                                                 defaultValue={""} 
+                                                required
                                                 onChange = { this.onChange }
                                             />
                                         </div>

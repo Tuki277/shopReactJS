@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { actionAddProductRequest, actionDeleteProductRequest, actionFetchProductsRequest } from './../../actions/index'
+import FileBase64 from 'react-file-base64'
 
 class Post extends Component {
 
     constructor(props) {
         super(props)
         this.state = {
-            name : '',
-            image : null,
-            detail : '',
-            price : 0,
-            color : '',
-            quantity : 0,
-            size : ''
+            name: '',
+            image: [],
+            detail: '',
+            price: 0,
+            color: '',
+            quantity: 0,
+            size: ''
         }
     }
 
@@ -29,32 +30,32 @@ class Post extends Component {
 
     showAllProducts = (products) => {
         var result = null
-        if ( products.length > 0 ) {
+        if (products.length > 0) {
             result = products.map((product, index) => {
                 return (
                     <tr>
-                        <td> { product.name } </td>
+                        <td> {product.name} </td>
                         <td>
-                            <img src = { product.image } style={{ width: '75%' }}/>
+                            <img src={product.image} style={{ width: '75%' }} />
                         </td>
-                        <td> { product.size } </td>
-                        <td> { product.detail_product } </td>
-                        <td> { product.price } </td>
-                        <td> { product.color } </td>
-                        <td> { product.quantity } </td>
+                        <td> {product.size} </td>
+                        <td> {product.detail_product} </td>
+                        <td> {product.price} </td>
+                        <td> {product.color} </td>
+                        <td> {product.quantity} </td>
                         <td>
-                            <button 
-                                type="button" 
+                            <button
+                                type="button"
                                 class="btn btn-secondary"
                             >
-                                    EDIT
+                                EDIT
                             </button>
                         </td>
                         <td>
-                            <button 
-                                type="button" 
+                            <button
+                                type="button"
                                 class="btn btn-danger"
-                                onClick = { () => this.deleteProduct(product.product_id) }
+                                onClick={() => this.deleteProduct(product.product_id)}
                             >
                                 X
                             </button>
@@ -69,35 +70,34 @@ class Post extends Component {
     onChange = (event) => {
         var target = event.target
         var name = target.name
-        var value = target.type === 'file' ? target.files[0] : target.value
+        var value = target.type === 'file' ? target.files : target.value
         this.setState({
-            [name] : value
+            [name]: value
         })
-    }
-
-    onClickHandler = () => {
-        const data = new FormData()
-        data.append('file', this.state.image)
     }
 
     onSave = (event) => {
         event.preventDefault()
-        const data = new FormData()
-        data.append('file', this.state.image)
-        console.log(this.state.image)
-        var { name, image, detail, price, color, quantity, size } = this.state
+        var { name, image, detail, price, color, quantity, size, files } = this.state
+        image = files
+        // image = data
         var product = {
-            name : name,
-            image : image,
-            detail : detail,
-            price : price,
-            color : color,
-            quantity : quantity,
-            size : size
+            name: name,
+            image: image[0].base64,
+            detail: detail,
+            price: price,
+            color: color,
+            quantity: quantity,
+            size: size
         }
         console.log(product)
         this.props.addProducts(product)
     }
+
+    getFiles(files){
+        this.setState({ files: files })
+        console.log(this.state)
+      }
 
     render() {
         return (
@@ -111,18 +111,18 @@ class Post extends Component {
                                 <div className="clearfix" />
                             </div>
                             <div className="x_content">
-                                <form className="form-horizontal form-label-left" method="POST" onSubmit = { this.onSave } enctype="multipart/form-data">
+                                <form className="form-horizontal form-label-left" method="POST" onSubmit={this.onSave} >
                                     <div className="form-group row">
                                     </div>
                                     <div className="form-group row">
                                         <label className="control-label col-md-3" htmlFor="name">Tên Sản Phẩm <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="name" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="name"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -130,11 +130,11 @@ class Post extends Component {
                                         <label className="control-label col-md-3" htmlFor="detail">Chi Tiết <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="detail" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="detail"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -142,11 +142,11 @@ class Post extends Component {
                                         <label className="control-label col-md-3" htmlFor="size">Size <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="size" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="size"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -154,11 +154,11 @@ class Post extends Component {
                                         <label className="control-label col-md-3" htmlFor="price">Giá <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="price" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="price"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -166,11 +166,11 @@ class Post extends Component {
                                         <label className="control-label col-md-3" htmlFor="price">Màu <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="color" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="color"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
@@ -178,16 +178,21 @@ class Post extends Component {
                                         <label className="control-label col-md-3" htmlFor="price">Số lượng <span className="required">*</span>
                                         </label>
                                         <div className="col-md-12">
-                                            <input 
-                                                type="text" 
-                                                required name="quantity" 
-                                                className="form-control col-md-7 " 
-                                                onChange = { this.onChange }
+                                            <input
+                                                type="text"
+                                                required name="quantity"
+                                                className="form-control col-md-7 "
+                                                onChange={this.onChange}
                                             />
                                         </div>
                                     </div>
                                     <br />
-                                    <input type="file" name="image" onChange = { this.onChange } />
+                                    {/* <input type="file" name="image" onChange={this.onChange} /> */}
+                                    <FileBase64 
+                                        multiple={ true }
+                                        onDone={ this.getFiles.bind(this) }
+
+                                    />
                                     <br />
                                     <br />
                                     <button type="submit" className="btn btn-primary">Tạo Sản Phẩm Mới</button>
@@ -198,35 +203,35 @@ class Post extends Component {
                     </div>
                 </div>
                 <div className="site-wrap">
-                <div className="site-section">
-                    <div className="container">
-                        <div className="row mb-5">
-                            <form className="col-md-12" method="post">
-                                <div className="site-blocks-table">
-                                    <table className="table table-bordered">
-                                        <thead>
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Image</th>
-                                                <th>Size</th>
-                                                <th>Detail</th>
-                                                <th>Price</th>
-                                                <th>Color</th>
-                                                <th>Quantity</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                { this.showAllProducts(this.props.products) }
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </form>
+                    <div className="site-section">
+                        <div className="container">
+                            <div className="row mb-5">
+                                <form className="col-md-12" method="post">
+                                    <div className="site-blocks-table">
+                                        <table className="table table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Image</th>
+                                                    <th>Size</th>
+                                                    <th>Detail</th>
+                                                    <th>Price</th>
+                                                    <th>Color</th>
+                                                    <th>Quantity</th>
+                                                    <th>Edit</th>
+                                                    <th>Delete</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {this.showAllProducts(this.props.products)}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             </div>
         )
     }
@@ -234,19 +239,19 @@ class Post extends Component {
 
 const mapStateToProps = state => {
     return {
-        products : state.products
+        products: state.products
     }
 }
 
 const mapDispatchToProps = (dispatch, props) => {
     return {
-        fetchAllProducts : () => {
+        fetchAllProducts: () => {
             dispatch(actionFetchProductsRequest())
         },
-        addProducts : (product) => {
+        addProducts: (product) => {
             dispatch(actionAddProductRequest(product))
         },
-        deleteProduct : (id) => {
+        deleteProduct: (id) => {
             dispatch(actionDeleteProductRequest(id))
         }
     }
