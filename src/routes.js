@@ -64,6 +64,11 @@ const routes = [
         main: () => <Post />
     },
     {
+        path: '/post/:id/edit',
+        exact: false,
+        main: () => <Post />
+    },
+    {
         report : '/report',
         exact: false,
         main: () => <Report />

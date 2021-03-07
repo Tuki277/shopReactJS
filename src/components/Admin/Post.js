@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actionUpdateProductRequest, actionAddProductRequest, actionDeleteProductRequest, actionFetchProductsRequest } from './../../actions/index'
+import { actionUpdateProductRequest, actionAddProductRequest, actionDeleteProductRequest, actionFetchProductsRequest, actionGetProductByIdRequest } from './../../actions/index'
 import FileBase64 from 'react-file-base64'
 
 class Post extends Component {
@@ -18,12 +18,41 @@ class Post extends Component {
         }
     }
 
-    componentDidMount() {
+    componentWillMount() {
         this.props.fetchAllProducts()
     }
 
-    componentWillReceiveProps() {
-        this.props.fetchAllProducts()
+    updateProduct = (id) => {
+        console.log(id)
+        var { products } = this.props
+        if ( products.length > 0 ) {
+            for ( var i = 0; i< products.length; i++) {
+                if ( products[i].product_id === id) {
+                    console.log(products[i])
+                    this.setState({
+                        name : products[i].name,
+                        image : products[0].image,
+                        detail : products[0].detail,
+                        price : products[0].price,
+                        color : products[0].color,
+                        quantity : products[0].quantity,
+                        size : products[0].size
+                    })
+                    var { name, image, detail, price, color, quantity, size, files } = this.state
+                    var product = {
+                        name: name,
+                        image: image[0].base64,
+                        detail: detail,
+                        price: price,
+                        color: color,
+                        quantity: quantity,
+                        size: size
+                    }
+                    console.log(product)
+                    // this.props.updateProduct(product)
+                }
+            }
+        }
     }
 
     deleteProduct = (id) => {
@@ -48,18 +77,19 @@ class Post extends Component {
                         <td> {product.color} </td>
                         <td> {product.quantity} </td>
                         <td>
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                            >
-                                EDIT
-                            </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    onClick = { () => this.updateProduct(product.product_id) }
+                                >
+                                    EDIT
+                                </button>
                         </td>
                         <td>
                             <button
                                 type="button"
                                 class="btn btn-danger"
-                                onClick={() => this.deleteProduct(product.product_id)}
+                                onClick={ () => this.deleteProduct(product.product_id) }
                             >
                                 X
                             </button>
@@ -103,7 +133,6 @@ class Post extends Component {
       }
 
     render() {
-
         var { name, image, detail, price, color, quantity, size } = this.state
 
         return (
