@@ -17,6 +17,7 @@ export const actionAddProduct = (products) => {
 }
 
 export const actionUpdateProductRequest = (products) => {
+    console.log(products)
     return dispatch => {
         return callApi(`products/${products.id}/edit`, 'PUT', products).then(res => {
             dispatch(actionUpdateProduct(res.data));

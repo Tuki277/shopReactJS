@@ -8,6 +8,7 @@ class Post extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id : '',
             name: '',
             image: [],
             detail: '',
@@ -28,28 +29,20 @@ class Post extends Component {
         if ( products.length > 0 ) {
             for ( var i = 0; i< products.length; i++) {
                 if ( products[i].product_id === id) {
-                    console.log(products[i])
+                    console.log( 'id =============== ', products[i].product_id)
+                    console.log('render 1')
                     this.setState({
+                        id : products[i].product_id,
                         name : products[i].name,
-                        image : products[0].image,
-                        detail : products[0].detail,
-                        price : products[0].price,
-                        color : products[0].color,
-                        quantity : products[0].quantity,
-                        size : products[0].size
+                        image : products[i].image,
+                        detail : products[i].detail,
+                        price : products[i].price,
+                        color : products[i].color,
+                        quantity : products[i].quantity,
+                        size : products[i].size
                     })
-                    var { name, image, detail, price, color, quantity, size, files } = this.state
-                    var product = {
-                        name: name,
-                        image: image[0].base64,
-                        detail: detail,
-                        price: price,
-                        color: color,
-                        quantity: quantity,
-                        size: size
-                    }
-                    console.log(product)
-                    // this.props.updateProduct(product)
+                    console.log(this.state)
+                    // this.props.updateProduct(products[i])
                 }
             }
         }
@@ -112,10 +105,12 @@ class Post extends Component {
 
     onSave = (event) => {
         event.preventDefault()
-        var { name, image, detail, price, color, quantity, size, files } = this.state
+        var { id, name, image, detail, price, color, quantity, size, files } = this.state
+        console.log(this.state)
         image = files
         // image = data
         var product = {
+            id : id,
             name: name,
             image: image[0].base64,
             detail: detail,
@@ -124,7 +119,11 @@ class Post extends Component {
             quantity: quantity,
             size: size
         }
-        this.props.addProducts(product)
+        if (id) {
+            this.props.updateProduct(product)
+        } else {
+            this.props.addProducts(product)
+        }
     }
 
     getFiles(files){

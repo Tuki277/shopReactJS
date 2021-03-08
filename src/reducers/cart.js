@@ -61,7 +61,6 @@ var cart = (state = initialState, action) => {
             return [...state]
         case Types.EDIT_PRODUCT:
             index = findIndex(state, products.id);
-            console.log(products.id)
             state[index] = products
             return [...state]
         default :
