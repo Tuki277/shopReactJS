@@ -11,6 +11,7 @@ import Checkout from './components/Checkout/Checkout';
 import Admin from './components/Admin/Admin'
 import Post from './components/Admin/Post';
 import Report from './components/Admin/Report'
+import Login from './components/Admin/Login'
 
 const routes = [
     {
@@ -69,9 +70,14 @@ const routes = [
         main: () => <Post />
     },
     {
-        report : '/report',
+        path : '/report',
         exact: false,
         main: () => <Report />
+    },
+    {
+        path: '/login',
+        exact: false,
+        main: ()=> <Login />
     },
     {
         path: '',

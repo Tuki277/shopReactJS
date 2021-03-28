@@ -136,3 +136,25 @@ export const checkout = (products) => {
         products
     }
 }
+
+export const loginRequest = (data) => {
+    console.log(data)
+    return dispatch => {
+        return callApi('login', 'POST', data).then(res => {
+            console.log(res.data.data.token)
+            localStorage.setItem('key', JSON.stringify({
+                token: res.data.data.token,
+                login: true
+            }))
+            dispatch(actionAddProduct(res.data))
+        })
+    }
+}
+
+export const login = (data) => {
+    console.log(data)
+    return {
+        type: Types.LOGIN,
+        data
+    }
+}
